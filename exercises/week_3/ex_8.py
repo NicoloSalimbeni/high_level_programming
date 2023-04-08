@@ -35,15 +35,12 @@ for i in range(0, n_walkers):
         elif a[i, j] > 0.5:
             a[i, j] = 1
 
-# print(a)
 # 2d array that contains the position after each number of steps
 positions = np.array([[np.sum(a[i][:j]) for j in range(n_steps + 1)]
                       for i in range(n_walkers)])
-# print("positions:\n", positions)
 
 # mean of the columns after a elementwise square
 meansq_positions = np.mean(np.square(positions), axis=0)
-# print("mean positions:\n", meansq_positions)
 
 # plot
 step = np.arange(0, n_steps + 1)
