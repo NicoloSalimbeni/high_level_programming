@@ -12,6 +12,7 @@
 # I didn't understood what I have to do
 
 import time
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -23,7 +24,7 @@ def Prime_Numbers(N):
     primes = [True] * N
     for i in range(0, int(np.sqrt(N))):
         if i in (0, 1):
-            primes[i] = True
+            primes[i] = False
         else:
             if primes[i]:
                 count = 0
@@ -40,6 +41,35 @@ times = []
 for i in range(100, 21000, 1000):
     time_in = time.time()
     Prime_Numbers(i)
+    times.append(time.time() - time_in)
+
+plt.plot(range(100, 21000, 1000), times)
+plt.xlabel("N")
+plt.ylabel("time")
+plt.show()
+
+# with better method
+
+
+def Prime_Numbers_Euler(N):
+    """return prime numbers up to N, better algorithm"""
+    a = np.arange(2, N)
+    for n in a:
+        if n > 0:
+            for j in range(2, math.ceil(N / n)):
+                a[j * n - 2] = 0
+    mask = a > 0
+    primes = a[mask]
+    np.insert(primes, 1, 1)
+    return primes
+
+
+print(Prime_Numbers_Euler(1000))
+
+times = []
+for i in range(100, 21000, 1000):
+    time_in = time.time()
+    Prime_Numbers_Euler(i)
     times.append(time.time() - time_in)
 
 plt.plot(range(100, 21000, 1000), times)
