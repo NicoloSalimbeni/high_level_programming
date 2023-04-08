@@ -20,22 +20,19 @@ import matplotlib.pyplot as plt
 # find prime numbers with ordinary sieve algorithm
 def Prime_Numbers(N):
     """return a list of prime numbers up to N"""
-    v = np.arange(0, N)
-    primes = [True] * N
-    for i in range(0, int(np.sqrt(N))):
-        if i in (0, 1):
-            primes[i] = False
-        else:
-            if primes[i]:
-                count = 0
-                while i * i + count * i < N:
-                    primes[i * i + count * i] = False
-                    count += 1
+    v = np.arange(2, N)
+    primes = [True] * (N - 2)
+    for i in range(2, int(np.sqrt(N))):
+        if primes[i - 2]:
+            count = 0
+            while i * i + count * i < N:
+                primes[i * i + count * i - 2] = False
+                count += 1
 
     return v[primes]
 
 
-print(Prime_Numbers(1000))
+print(Prime_Numbers(100))
 
 times = []
 for i in range(100, 21000, 1000):
@@ -64,7 +61,7 @@ def Prime_Numbers_Euler(N):
     return primes
 
 
-print(Prime_Numbers_Euler(1000))
+print(Prime_Numbers_Euler(100))
 
 times = []
 for i in range(100, 21000, 1000):
