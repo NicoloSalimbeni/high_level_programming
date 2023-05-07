@@ -47,7 +47,7 @@ U, spectrum, Vt = np.linalg.svd(cam_records)
 eigval = spectrum
 explained_var = eigval / np.sum(eigval)
 
-print('fraction of variability explained per principal component:',
+print('fraction of variability explained per principal component:\n',
       explained_var)
 
 records_pc = np.dot(U.T, cam_records)
